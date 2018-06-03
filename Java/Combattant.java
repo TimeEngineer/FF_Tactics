@@ -2,14 +2,12 @@ public class Combattant extends Personnage implements ICombattant {
 
 	protected int atk;
 	protected int range;
-	protected int contrecoup;
 	protected String nameAtk;
 
-	public Combattant(String nom, int hp, int mp, int def, int move, int atk, int range, int contrecoup, String nameAtk) {
+	public Combattant(String nom, int hp, int mp, int def, int move, int atk, int range, String nameAtk) {
 		super(nom, hp, mp, def, move);
 		this.atk = atk;
 		this.range = range;
-		this.contrecoup = contrecoup;
 		this.nameAtk = nameAtk;
 	}
 
@@ -23,20 +21,23 @@ public class Combattant extends Personnage implements ICombattant {
 		"MV : " + Integer.toString(super.move) + '\n' +
 		"ATK : " + Integer.toString(atk) + '\n' +
 		"RANGE : " + Integer.toString(range) + '\n' +
-		"CC : " + Integer.toString(contrecoup) + '\n';
+		"POS: " + Integer.toString(super.posx) + " " + Integer.toString(super.posy);
 	}
 
-	public void attaque(Personnage cible) throws Exception {
+	public String attaque(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.range) {
+			if (super.getClass() == BlackMage.class) {
+				if (super.mp < 1) {
+					throw new Exception("Pas assez de mana");
+				}
+				super.mp -= 1;
+			}
 			int dmg = -atk+cible.def; 
 			if (dmg >= 0) {
 				throw new Exception("Attention vous n'allez pas infliger des dêgats");
 			}
 			cible.estCible(dmg);
-			if (this.contrecoup > 0) {
-				this.estCible(-this.contrecoup);
-			}
-			System.out.println(nom + nameAtk + cible.nom);
+			return nom + nameAtk + cible.nom + " (" + cible.hp + ")";
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");

@@ -8,9 +8,8 @@ public class Archer extends Combattant {
 	private static int atk = 7;
 	private static String nameAtk = " décoche une flèche sur ";
 	private static int range = 6;
-	private static int contrecoup = 0;
 
 	public Archer() {
-		super(Archer.nom, Archer.hp, Archer.mp, Archer.def, Archer.move, Archer.atk, Archer.range, Archer.contrecoup, Archer.nameAtk);
+		super(Archer.nom, Archer.hp, Archer.mp, Archer.def, Archer.move, Archer.atk, Archer.range, Archer.nameAtk);
 	}
 }

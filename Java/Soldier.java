@@ -11,10 +11,8 @@ public class Soldier extends Equilibre {
 	private static String nameHeal = " soigne ";
 	private static int a_range = 1;
 	private static int h_range = 0;
-	private static int a_contrecoup = 0;
-	private static int h_contrecoup = 0;
 	
 	public Soldier() {
-		super(Soldier.nom, Soldier.hp, Soldier.mp, Soldier.def, Soldier.move, Soldier.atk, Soldier.heal, Soldier.a_range, Soldier.h_range, Soldier.a_contrecoup, Soldier.h_contrecoup, Soldier.nameAtk, Soldier.nameHeal);
+		super(Soldier.nom, Soldier.hp, Soldier.mp, Soldier.def, Soldier.move, Soldier.atk, Soldier.heal, Soldier.a_range, Soldier.h_range, Soldier.nameAtk, Soldier.nameHeal);
 	}
 }

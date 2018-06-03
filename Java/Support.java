@@ -2,14 +2,12 @@ public class Support extends Personnage implements ISupport {
 
 	protected int heal;
 	protected int range;
-	protected int contrecoup;
 	protected String nameHeal;
 
-	public Support(String nom, int hp, int mp, int def, int move, int heal, int range, int contrecoup, String nameHeal) {
+	public Support(String nom, int hp, int mp, int def, int move, int heal, int range, String nameHeal) {
 		super(nom, hp, mp, def, move);
 		this.heal = heal;
 		this.range = range;
-		this.contrecoup = contrecoup;
 		this.nameHeal =  nameHeal;
 	}
 
@@ -23,16 +21,17 @@ public class Support extends Personnage implements ISupport {
 		"MV : " + Integer.toString(super.move) + '\n' +
 		"HEAL : " + Integer.toString(heal) + '\n' +
 		"RANGE: " + Integer.toString(range) + '\n' +
-		"CC " + Integer.toString(contrecoup) + '\n';
+		"POS: " + Integer.toString(super.posx) + " " + Integer.toString(super.posy);
 	}
 
-	public void soigne(Personnage cible) throws Exception {
+	public String soigne(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.range) {
-			cible.estCible(heal);
-			if (this.contrecoup > 0) {
-				this.estCible(-this.contrecoup);
+			if (super.mp < 1) {
+				throw new Exception("Pas assez de mana");
 			}
-			System.out.println(nom + nameHeal + cible.nom);
+			cible.estCible(heal);
+			super.mp -= 1;
+			return nom + nameHeal + cible.nom;
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");

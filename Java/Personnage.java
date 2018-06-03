@@ -1,12 +1,15 @@
-public abstract class Personnage {
+import java.lang.*;
+
+public abstract class Personnage implements Cloneable {
 
 	protected String nom;
 	protected int hp;
 	protected int mp;
 	protected int def;
 	protected int move;
-	protected int[] pos = new int[2];
-	protected boolean alive;
+	protected int posx;
+	protected int posy;
+	protected boolean alive = true;
 
 	public Personnage(String nom, int hp, int mp, int def, int move) {
 		this.nom = nom;
@@ -15,9 +18,36 @@ public abstract class Personnage {
 		this.def = def;
 		this.move = move;
 	}
+	@Override
+	protected Personnage clone() throws CloneNotSupportedException{    
+	  return(Personnage) super.clone();
+	}
+	public boolean get_alive() {
+		return this.alive;
+	}
+
+	public int get_posx() {
+		return this.posx;
+	}
+
+	public int get_posy() {
+		return this.posy;
+	}
+
+	public int get_move() {
+		return this.move;
+	}
+
+	public void set_pos(int a, int b) {
+		this.posx = a;
+		this.posy = b;
+	}
 
 	public int distance(Personnage other) {
-		return this.pos[0] - other.pos[0] + this.pos[1] - other.pos[1];
+		return Math.abs(this.posx - other.posx) + Math.abs(this.posy - other.posy);
+	}
+	public int distance(int a, int b) {
+		return Math.abs(this.posx - a) + Math.abs(this.posy - b);
 	}
 
 	public void estCible(int nb) {

@@ -4,19 +4,15 @@ public class Equilibre extends Personnage implements ICombattant, ISupport {
 	protected int heal;
 	protected int a_range;
 	protected int h_range;
-	protected int a_contrecoup;
-	protected int h_contrecoup;
 	protected String nameAtk;
 	protected String nameHeal;
 
-	public Equilibre(String nom, int hp, int mp, int def, int move, int atk, int heal, int a_range, int h_range, int a_contrecoup, int h_contrecoup, String nameAtk, String nameHeal) {
+	public Equilibre(String nom, int hp, int mp, int def, int move, int atk, int heal, int a_range, int h_range, String nameAtk, String nameHeal) {
 		super(nom, hp, mp, def, move);
 		this.atk = atk;
 		this.heal = heal;
 		this.a_range = a_range;
 		this.h_range = h_range;
-		this.a_contrecoup = a_contrecoup;
-		this.h_contrecoup = h_contrecoup;
 		this.nameAtk = nameAtk;
 		this.nameHeal = nameHeal;
 	}
@@ -33,34 +29,31 @@ public class Equilibre extends Personnage implements ICombattant, ISupport {
 		"HEAL : " + Integer.toString(heal) + '\n' +
 		"RANGE ATK: " + Integer.toString(a_range) + '\n' +
 		"RANGE HEAL: " + Integer.toString(h_range) + '\n' +
-		"CC ATK: " + Integer.toString(a_contrecoup) + '\n' +
-		"CC HEAL: " + Integer.toString(h_contrecoup) + '\n';
+		"POS: " + Integer.toString(super.posx) + " " + Integer.toString(super.posy);
 	}
 
-	public void attaque(Personnage cible) throws Exception {
+	public String attaque(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.a_range) {
 			int dmg = -atk+cible.def;
 			if (dmg >= 0) {
 				throw new Exception("Attention vous n'allez pas infliger des dêgats");
 			}
 			cible.estCible(dmg);
-			if (this.a_contrecoup > 0) {
-				this.estCible(-this.a_contrecoup);
-			}
-			System.out.println(nom + nameAtk + cible.nom);
+			return nom + nameAtk + cible.nom;
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");
 		}
 	}
 
-	public void soigne(Personnage cible) throws Exception {
+	public String soigne(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.h_range) {
-			cible.estCible(heal);
-			if (this.h_contrecoup > 0) {
-				this.estCible(-this.h_contrecoup);
+			if (super.mp < 1) {
+				throw new Exception("Pas assez de mana");
 			}
-			System.out.println(nom + nameHeal + cible.nom);
+			cible.estCible(heal);
+			super.mp -= 1;
+			return nom + nameHeal + cible.nom;
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");
