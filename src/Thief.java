@@ -1,11 +1,11 @@
 public class Thief extends Combattant {
 
 	private static String nom = "Thief";
-	private static int hp = 6;
-	private static int mp = 1;
-	private static int def = 3;
+	private static int hp = 161;
+	private static int mp = 51;
+	private static int def = 79;
 	private static int move = 4;
-	private static int atk = 7;
+	private static int atk = 150;
 	private static String nameAtk = " frappe avec son poignard sur ";
 	private static int range = 1;
 	

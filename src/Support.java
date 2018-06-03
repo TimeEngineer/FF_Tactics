@@ -26,11 +26,11 @@ public class Support extends Personnage implements ISupport {
 
 	public String soigne(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.range) {
-			if (super.mp < 1) {
+			if (super.mp < 10) {
 				throw new Exception("Pas assez de mana");
 			}
 			cible.estCible(heal);
-			super.mp -= 1;
+			super.mp -= 10;
 			return nom + nameHeal + cible.nom;
 		}
 		else {

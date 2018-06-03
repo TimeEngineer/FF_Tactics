@@ -1,11 +1,11 @@
 public class WhiteMage extends Support {
 
 	private static String nom = "White Mage";
-	private static int hp = 6;
-	private static int mp = 4;
-	private static int def = 3;
+	private static int hp = 151;
+	private static int mp = 91;
+	private static int def = 76;
 	private static int move = 3;
-	private static int heal = 8;
+	private static int heal = 226;
 	private static String nameHeal = " soigne ";
 	private static int range = 4;
 
