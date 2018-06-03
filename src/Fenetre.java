@@ -483,7 +483,7 @@ public class Fenetre  {
 				game = true;
 			}
 			if (e.getSource() == add1) {
-				if (!list.isSelectionEmpty()) {
+				if (!list.isSelectionEmpty() && team1.getSize() < size) {
 					try {
 						team1.addElement(selected.clone());
 					}
@@ -493,7 +493,7 @@ public class Fenetre  {
 				}
 			}
 			if (e.getSource() == add2) {
-				if (!list.isSelectionEmpty()) {
+				if (!list.isSelectionEmpty() && team2.getSize() < size) {
 					try {
 						team2.addElement(selected.clone());
 					}
