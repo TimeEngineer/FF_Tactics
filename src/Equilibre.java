@@ -39,7 +39,7 @@ public class Equilibre extends Personnage implements ICombattant, ISupport {
 				throw new Exception("Attention vous n'allez pas infliger des dêgats");
 			}
 			cible.estCible(dmg);
-			return nom + nameAtk + cible.nom;
+			return nom + nameAtk + cible.nom + " (" + cible.hp + ")";
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");
@@ -53,7 +53,7 @@ public class Equilibre extends Personnage implements ICombattant, ISupport {
 			}
 			cible.estCible(heal);
 			super.mp -= 10;
-			return nom + nameHeal + cible.nom;
+			return nom + nameHeal + cible.nom + " (" + cible.hp + ")";
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");

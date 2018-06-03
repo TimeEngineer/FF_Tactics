@@ -31,7 +31,7 @@ public class Support extends Personnage implements ISupport {
 			}
 			cible.estCible(heal);
 			super.mp -= 10;
-			return nom + nameHeal + cible.nom;
+			return nom + nameHeal + cible.nom + " (" + cible.hp + ")";
 		}
 		else {
 			throw new Exception("La cible est trop éloigné");

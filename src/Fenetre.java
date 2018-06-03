@@ -64,7 +64,7 @@ public class Fenetre  {
 	private int selectedx = 0;
 	private int selectedy = 0;
 	private int team = 0;
-	private final static int size = 5;
+	private final static int size = 6;
 	private JButton[][] a = new JButton[size][size];
 	
 	public Fenetre() {
@@ -214,7 +214,7 @@ public class Fenetre  {
 			for (i = 0 ; i < size ; i++) {
 				for (j = 0 ; j < size ; j++) {
 					a[i][j] = new JButton();
-					a[i][j].setPreferredSize(new Dimension(30,30));
+					a[i][j].setPreferredSize(new Dimension(25,25));
 					a[i][j].addActionListener(new ButtonListener());
 					a[i][j].setBackground(Color.black);
 				}
@@ -518,6 +518,7 @@ public class Fenetre  {
 				waitAtk1 = true;
 			}
 			if (e.getSource() == bHeal1) {
+				selected = perso1;
 				selectTarget();
 				waitHeal1 = true;
 			}
@@ -526,6 +527,7 @@ public class Fenetre  {
 				waitAtk2 = true;
 			}
 			if (e.getSource() == bHeal2) {
+				selected = perso2;
 				selectTarget();
 				waitHeal2 = true;
 			}
@@ -738,16 +740,15 @@ public class Fenetre  {
 					}
 				}
 				else if (waitHeal1) {
-					Personnage perso = perso1;
 					if (list1.isSelectionEmpty()) {
 						textCombat.setText("Sélection vide");
 					}
 					else {
 						try {
-							if (perso instanceof Support)
-								data = ((Support)perso).soigne(perso1);
+							if (selected instanceof Support)
+								data = ((Support)selected).soigne(perso1);
 							else
-								data = ((Equilibre)perso).soigne(perso1);
+								data = ((Equilibre)selected).soigne(perso1);
 							textCombat.setText(data);
 							removeAllButton1();
 		      				panelGo.remove(ok);
@@ -764,16 +765,15 @@ public class Fenetre  {
 					}
 				}
 				else if (waitHeal2) {
-					Personnage perso = perso2;
 					if (list2.isSelectionEmpty()) {
 						textCombat.setText("Sélection vide");
 					}
 					else {
 						try {
-							if (perso instanceof Support)
-								data = ((Support)perso).soigne(perso2);
+							if (selected instanceof Support)
+								data = ((Support)selected).soigne(perso2);
 							else
-								data = ((Equilibre)perso).soigne(perso2);
+								data = ((Equilibre)selected).soigne(perso2);
 							textCombat.setText(data);
 							removeAllButton2();
 		      				panelGo.remove(ok);
