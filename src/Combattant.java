@@ -26,12 +26,6 @@ public class Combattant extends Personnage implements ICombattant {
 
 	public String attaque(Personnage cible) throws Exception {
 		if (this.distance(cible) <= this.range) {
-			if (super.getClass() == BlackMage.class) {
-				if (super.mp < 10) {
-					throw new Exception("Pas assez de mana");
-				}
-				super.mp -= 10;
-			}
 			int dmg = -atk+cible.def; 
 			if (dmg >= 0) {
 				throw new Exception("Attention vous n'allez pas infliger des dêgats");

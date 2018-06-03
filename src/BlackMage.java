@@ -12,4 +12,14 @@ public class BlackMage extends Combattant {
 	public BlackMage() {
 		super(BlackMage.nom, BlackMage.hp, BlackMage.mp, BlackMage.def, BlackMage.move, BlackMage.atk, BlackMage.range, BlackMage.nameAtk);
 	}
+
+	public String attaque(Personnage cible) throws Exception {
+		if (super.distance(cible) <= super.range) {
+			if (super.mp < 10) {
+				throw new Exception("Pas assez de mana");
+			}
+			super.mp -= 10;
+		}
+		return super.attaque(cible);
+	}
 }

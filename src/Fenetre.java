@@ -258,27 +258,7 @@ public class Fenetre  {
 		      		selectedy = perso1.get_posy();
 		      		a[selectedx][selectedy].setBackground(Color.green);
 		      		if (game && turn) {
-		      			if (perso1.getClass().getSuperclass() == Combattant.class) {
-			      			panelCombat1.remove(bHeal1);
-			      			panelCombat1.add(bAtk1);
-			      			if (canMove)
-			      				panelCombat1.add(bMove1);
-			      			panelCombat1.repaint();
-			      		}
-			      		else if (perso1.getClass().getSuperclass() == Support.class) {
-			      			panelCombat1.remove(bAtk1);
-			      			panelCombat1.add(bHeal1);
-			      			if (canMove)
-			      				panelCombat1.add(bMove1);
-			      			panelCombat1.repaint();
-			      		}
-			      		else {
-			      			panelCombat1.add(bAtk1);
-			      			panelCombat1.add(bHeal1);
-			      			if (canMove)
-			      				panelCombat1.add(bMove1);
-			      			panelCombat1.repaint();
-			      		}
+		      			showButton(perso1, panelCombat1, bAtk1, bHeal1, bMove1);
 		      		}
 		      		String data = perso1.allInfo();
 		      		area1.setText(data);
@@ -294,27 +274,7 @@ public class Fenetre  {
 		      		selectedy = perso2.get_posy();
 		      		a[selectedx][selectedy].setBackground(Color.green);
 		      		if (game && !turn) {
-		      			if (perso2.getClass().getSuperclass() == Combattant.class) {
-			      			panelCombat2.remove(bHeal2);
-			      			panelCombat2.add(bAtk2);
-			      			if (canMove)
-			      				panelCombat2.add(bMove2);
-			      			panelCombat2.repaint();
-			      		}
-			      		else if (perso2.getClass().getSuperclass() == Support.class) {
-			      			panelCombat2.remove(bAtk2);
-			      			panelCombat2.add(bHeal2);
-			      			if (canMove)
-			      				panelCombat2.add(bMove2);
-			      			panelCombat2.repaint();
-			      		}
-			      		else {
-			      			panelCombat2.add(bAtk2);
-			      			panelCombat2.add(bHeal2);
-			      			if (canMove)
-			      				panelCombat2.add(bMove2);
-			      			panelCombat2.repaint();
-			      		}
+		      			showButton(perso2, panelCombat2, bAtk2, bHeal2, bMove2);
 			      	}
 	      			String data = perso2.allInfo();
 	      			area2.setText(data);
@@ -367,6 +327,20 @@ public class Fenetre  {
 		panelCombat2.remove(bMove2);
 		panelCombat2.repaint();
 	}
+
+	public void waitAll1() {
+		waitAtk1 = false;
+		waitHeal1 = false;
+		waitMove1 = false;
+	}
+
+	public void waitAll2() {
+		waitAtk2 = false;
+		waitHeal2 = false;
+		waitMove2 = false;
+	}
+
+
 
 	public void clearAllSelect() {
 		if (!list1.isSelectionEmpty())
@@ -434,6 +408,38 @@ public class Fenetre  {
 		team = 0;
 		return null;
 	}
+
+	public void showButton(Personnage perso, JPanel panelCombat, JButton bAtk, JButton bHeal, JButton bMove) {
+		if (perso instanceof Combattant) {
+  			panelCombat.remove(bHeal);
+  			panelCombat.add(bAtk);
+  		}
+  		else if (perso instanceof Support) {
+  			panelCombat.remove(bAtk);
+  			panelCombat.add(bHeal);
+  		}
+  		else {
+  			panelCombat.add(bAtk);
+  			panelCombat.add(bHeal);
+  		}
+		if (canMove)
+			panelCombat.add(bMove);
+		panelCombat.repaint();
+	}
+
+	public void finDePartie() {
+		panel1.remove(list1);
+		panel1.repaint();
+		panel2.remove(list2);
+		panel2.repaint();
+		panel3.remove(map);
+		panel3.repaint();
+		panel4.remove(bTour);
+		panel4.remove(bPasser);
+		panel4.repaint();
+	}
+
+	// END OF FUNCTIONS ------------------------------------------------
 
 	private class ButtonListener implements ActionListener 
 	{
@@ -548,9 +554,7 @@ public class Fenetre  {
 					removeAllButton1();
 					clearAllSelect();
 					canMove = true;
-					waitAtk1 = false;
-					waitHeal1 = false;
-					waitMove1 = false;
+					waitAll1();
 					turn = false;
 					bTour.setText("Tour JOUEUR 2");
 				}
@@ -558,9 +562,7 @@ public class Fenetre  {
 					removeAllButton2();
 					clearAllSelect();
 					canMove = true;
-					waitAtk2 = false;
-					waitHeal2 = false;
-					waitMove2 = false;
+					waitAll2();
 					turn = true;
 					bTour.setText("Tour JOUEUR 1");
 				}
@@ -621,50 +623,10 @@ public class Fenetre  {
 						}
 			      		a[selectedx][selectedy].setBackground(Color.green);
 			      		if (game && turn) {
-			      			if (perso1.getClass().getSuperclass() == Combattant.class) {
-				      			panelCombat1.remove(bHeal1);
-				      			panelCombat1.add(bAtk1);
-				      			if (canMove)
-				      				panelCombat1.add(bMove1);
-				      			panelCombat1.repaint();
-				      		}
-				      		else if (perso1.getClass().getSuperclass() == Support.class) {
-				      			panelCombat1.remove(bAtk1);
-				      			panelCombat1.add(bHeal1);
-				      			if (canMove)
-				      				panelCombat1.add(bMove1);
-				      			panelCombat1.repaint();
-				      		}
-				      		else {
-				      			panelCombat1.add(bAtk1);
-				      			panelCombat1.add(bHeal1);
-				      			if (canMove)
-				      				panelCombat1.add(bMove1);
-				      			panelCombat1.repaint();
-				      		}
+			      			showButton(perso1, panelCombat1, bAtk1, bHeal1, bMove1);
 			      		}
 			      		else if (game && !turn) {
-			      			if (perso2.getClass().getSuperclass() == Combattant.class) {
-				      			panelCombat2.remove(bHeal2);
-				      			panelCombat2.add(bAtk2);
-				      			if (canMove)
-				      				panelCombat2.add(bMove2);
-				      			panelCombat2.repaint();
-				      		}
-				      		else if (perso2.getClass().getSuperclass() == Support.class) {
-				      			panelCombat2.remove(bAtk2);
-				      			panelCombat2.add(bHeal2);
-				      			if (canMove)
-				      				panelCombat2.add(bMove2);
-				      			panelCombat2.repaint();
-				      		}
-				      		else {
-				      			panelCombat2.add(bAtk2);
-				      			panelCombat2.add(bHeal2);
-				      			if (canMove)
-				      				panelCombat2.add(bMove2);
-				      			panelCombat2.repaint();
-				      		}
+			      			showButton(perso2, panelCombat2, bAtk2, bHeal2, bMove2);
 				      	}
 				      	if (team == 1) {
 				      		String data = perso1.allInfo();
@@ -791,27 +753,11 @@ public class Fenetre  {
 				}
 				if (team1.getSize() == 0) {
 					textCombat.setText("Victoire de l'équipe 2");
-					panel1.remove(list1);
-					panel1.repaint();
-					panel2.remove(list2);
-					panel2.repaint();
-					panel3.remove(map);
-					panel3.repaint();
-					panel4.remove(bTour);
-					panel4.remove(bPasser);
-					panel4.repaint();
+					finDePartie();
 				}
 				else if (team2.getSize() == 0) {
 					textCombat.setText("Victoire de l'équipe 1");
-					panel1.remove(list1);
-					panel1.repaint();
-					panel2.remove(list2);
-					panel2.repaint();
-					panel3.remove(map);
-					panel3.repaint();
-					panel4.remove(bTour);
-					panel4.remove(bPasser);
-					panel4.repaint();
+					finDePartie();
 				}
 			}
 		}
